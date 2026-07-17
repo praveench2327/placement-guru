@@ -110,7 +110,7 @@ export function AdminAcademicYearsPage() {
 
     try {
       setActionLoading(-1)
-      const url = editingYear ? `/api/academic-years/${editingYear.id}` : '/api/academic-years'
+      const url = editingYear ? `/api/academic-years/${editingYear.academic_year}` : '/api/academic-years'
       const method = editingYear ? 'PUT' : 'POST'
       const res = await fetch(url, {
         method,
@@ -136,8 +136,8 @@ export function AdminAcademicYearsPage() {
   const handleActivate = async (y: AcademicYear) => {
     if (!confirm(`Activate ${y.academic_year}? This will archive the current active year.`)) return
     try {
-      setActionLoading(y.id)
-      await fetch(`/api/academic-years/${y.id}`, {
+      setActionLoading(-1)
+      await fetch(`/api/academic-years/${y.academic_year}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...y, status: 'ACTIVE' }),
@@ -154,8 +154,8 @@ export function AdminAcademicYearsPage() {
   const handleArchive = async (y: AcademicYear) => {
     if (!confirm(`Archive ${y.academic_year}?`)) return
     try {
-      setActionLoading(y.id)
-      await fetch(`/api/academic-years/${y.id}`, {
+      setActionLoading(-1)
+      await fetch(`/api/academic-years/${y.academic_year}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...y, status: 'ARCHIVED' }),
@@ -172,8 +172,8 @@ export function AdminAcademicYearsPage() {
   const handleDelete = async (y: AcademicYear) => {
     if (!confirm(`Delete ${y.academic_year}? This can only succeed if no data exists for this year.`)) return
     try {
-      setActionLoading(y.id)
-      const res = await fetch(`/api/academic-years/${y.id}`, {
+      setActionLoading(-1)
+      const res = await fetch(`/api/academic-years/${y.academic_year}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       })
