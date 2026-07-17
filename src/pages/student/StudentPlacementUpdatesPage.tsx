@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { Check, FileUp, Send, Loader2 } from 'lucide-react'
-import { initialPlacementUpdateRequests } from '../../data/platformData'
 
 export function StudentPlacementUpdatesPage() {
-  const [requests, setRequests] = useState(initialPlacementUpdateRequests)
+  const [requests, setRequests] = useState<{id: string, company: string, packageLpa: string, offerLetter: string, submittedAt: string, status: string, source: string}[]>([])
   const [company, setCompany] = useState('')
   const [packageLpa, setPackageLpa] = useState('')
   const [offerLetter, setOfferLetter] = useState('No file selected')
