@@ -1,0 +1,214 @@
+{
+  "master_students": [],
+  "placement_forms": [],
+  "form_submissions": [],
+  "companies": [],
+  "placements": [],
+  "placement_notifications": [],
+  "users": [
+    {
+      "username": "admin@college.edu",
+      "password_hash": "$2a$10$GrFXdEItjKFa5cspOn/x6OslCU1T0JbKMlLt8FZM8Oz4sc.z2gPsO",
+      "role": "admin",
+      "name": "Admin User",
+      "associated_id": null
+    },
+    {
+      "username": "coordinator-cse@college.edu",
+      "password_hash": "$2a$10$BcbBFjmDqtJ5i6Pe0SlX9OmeCi1HVGizdBrEjryDtbcJgoJ5ot/W6",
+      "role": "coordinator",
+      "name": "CSE Coordinator",
+      "associated_id": "Computer Science Engineering"
+    },
+    {
+      "username": "coordinator-cseai@college.edu",
+      "password_hash": "$2a$10$BcbBFjmDqtJ5i6Pe0SlX9OmeCi1HVGizdBrEjryDtbcJgoJ5ot/W6",
+      "role": "coordinator",
+      "name": "CSE AI Coordinator",
+      "associated_id": "Computer Science Engineering - Artificial Intelligence"
+    },
+    {
+      "username": "coordinator-cseml@college.edu",
+      "password_hash": "$2a$10$BcbBFjmDqtJ5i6Pe0SlX9OmeCi1HVGizdBrEjryDtbcJgoJ5ot/W6",
+      "role": "coordinator",
+      "name": "CSE ML Coordinator",
+      "associated_id": "Computer Science Engineering - Machine Learning"
+    },
+    {
+      "username": "coordinator-it@college.edu",
+      "password_hash": "$2a$10$BcbBFjmDqtJ5i6Pe0SlX9OmeCi1HVGizdBrEjryDtbcJgoJ5ot/W6",
+      "role": "coordinator",
+      "name": "IT Coordinator",
+      "associated_id": "Information Technology"
+    },
+    {
+      "username": "coordinator-ece@college.edu",
+      "password_hash": "$2a$10$BcbBFjmDqtJ5i6Pe0SlX9OmeCi1HVGizdBrEjryDtbcJgoJ5ot/W6",
+      "role": "coordinator",
+      "name": "ECE Coordinator",
+      "associated_id": "Electronics and Communication Engineering"
+    },
+    {
+      "username": "coordinator-eee@college.edu",
+      "password_hash": "$2a$10$BcbBFjmDqtJ5i6Pe0SlX9OmeCi1HVGizdBrEjryDtbcJgoJ5ot/W6",
+      "role": "coordinator",
+      "name": "EEE Coordinator",
+      "associated_id": "Electrical and Electronics Engineering"
+    }
+  ],
+  "career_roadmaps": [
+    {
+      "id": "frontend",
+      "title": "Frontend Developer",
+      "description": "Build beautiful, interactive user interfaces with modern web technologies.",
+      "icon": "🎨",
+      "color": "#3b82f6",
+      "pdf_path": "/roadmaps/frontend.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "backend",
+      "title": "Backend Developer",
+      "description": "Design robust APIs, manage databases, and build server-side applications.",
+      "icon": "⚙️",
+      "color": "#10b981",
+      "pdf_path": "/roadmaps/backend.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "fullstack",
+      "title": "Full Stack Developer",
+      "description": "Master both frontend and backend to build complete web applications.",
+      "icon": "🚀",
+      "color": "#8b5cf6",
+      "pdf_path": "/roadmaps/fullstack.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "java",
+      "title": "Java Developer",
+      "description": "Build enterprise-grade applications with Java and Spring ecosystem.",
+      "icon": "☕",
+      "color": "#f97316",
+      "pdf_path": "/roadmaps/java.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "python",
+      "title": "Python Developer",
+      "description": "Versatile programming with Python for web, automation, and scripting.",
+      "icon": "🐍",
+      "color": "#3b82f6",
+      "pdf_path": "/roadmaps/python.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "data-analyst",
+      "title": "Data Analyst",
+      "description": "Extract insights from data using statistical analysis and visualization.",
+      "icon": "📊",
+      "color": "#06b6d4",
+      "pdf_path": "/roadmaps/data-analyst.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "data-scientist",
+      "title": "Data Scientist",
+      "description": "Apply machine learning and statistical modeling to solve complex problems.",
+      "icon": "🔬",
+      "color": "#6366f1",
+      "pdf_path": "/roadmaps/data-scientist.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "ai-ml",
+      "title": "AI/ML Engineer",
+      "description": "Design and deploy production-grade machine learning systems.",
+      "icon": "🤖",
+      "color": "#ec4899",
+      "pdf_path": "/roadmaps/ai-ml.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "devops",
+      "title": "DevOps Engineer",
+      "description": "Automate deployment pipelines and manage cloud infrastructure.",
+      "icon": "🔄",
+      "color": "#14b8a6",
+      "pdf_path": "/roadmaps/devops.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "cloud",
+      "title": "Cloud Engineer",
+      "description": "Design and manage scalable cloud solutions on AWS, Azure, or GCP.",
+      "icon": "☁️",
+      "color": "#f59e0b",
+      "pdf_path": "/roadmaps/cloud.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "cybersecurity",
+      "title": "Cyber Security",
+      "description": "Protect systems and networks from cyber threats and vulnerabilities.",
+      "icon": "🛡️",
+      "color": "#ef4444",
+      "pdf_path": "/roadmaps/cybersecurity.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "android",
+      "title": "Android Developer",
+      "description": "Build native Android applications with Kotlin and Jetpack Compose.",
+      "icon": "📱",
+      "color": "#22c55e",
+      "pdf_path": "/roadmaps/android.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "uiux",
+      "title": "UI/UX Designer",
+      "description": "Design intuitive, beautiful interfaces with user-centered design principles.",
+      "icon": "✨",
+      "color": "#d946ef",
+      "pdf_path": "/roadmaps/uiux.pdf",
+      "download_count": 0,
+      "skills": []
+    },
+    {
+      "id": "blockchain",
+      "title": "Blockchain Developer",
+      "description": "Build decentralized applications and smart contracts on the blockchain.",
+      "icon": "⛓️",
+      "color": "#a855f7",
+      "pdf_path": "/roadmaps/blockchain.pdf",
+      "download_count": 0,
+      "skills": []
+    }
+  ],
+  "student_career_progress": [],
+  "learning_resources": [],
+  "master_history": [
+    {
+      "id": 1,
+      "file_name": "manual-test.xlsx",
+      "upload_date": "2026-07-12",
+      "records_count": 1,
+      "uploaded_by": "Test",
+      "rows": [],
+      "academic_year": "2025-2026"
+    }
+  ]
+}
