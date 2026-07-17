@@ -739,7 +739,7 @@ export function AdminFormsPage() {
 
     // Automatically create or update the company drive
     if (hasCompanyDrive && compName.trim()) {
-      const companies = loadCompanies()
+      const companies = loadCompanies() || []
       const existingCompIndex = companies.findIndex((c) => c.formId === nextForm.id)
       
       const companyPkg = `₹ ${compPkgMin}–${compPkgMax} LPA`
