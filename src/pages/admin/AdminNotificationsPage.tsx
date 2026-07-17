@@ -45,7 +45,7 @@ function formatTime(isoString: string) {
 }
 
 export function AdminNotificationsPage() {
-  const { selectedYear } = useAcademicYear()
+  const { selectedYear, yearOptions } = useAcademicYear()
   const liveNotifications = useStoreState(loadPlacementNotifications) ?? []
   const masterRows = useStoreState(loadMasterRows) ?? []
 
@@ -169,6 +169,10 @@ export function AdminNotificationsPage() {
   function handleBroadcast(e: React.FormEvent) {
     e.preventDefault()
     if (!subject || !message) return
+    if (!yearOptions || yearOptions.length === 0) {
+      showToast('You must create an Academic Year in settings before sending broadcasts.')
+      return
+    }
 
     setSending(true)
 

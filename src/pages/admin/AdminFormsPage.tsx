@@ -531,6 +531,10 @@ export function AdminFormsPage() {
   }
 
   async function handleClone(id: string) {
+    if (!yearOptions || yearOptions.length === 0) {
+      showToast('You must create an Academic Year in settings before cloning forms.')
+      return
+    }
     const target = formsList.find((form) => form.id === id)
     if (!target) return
     const cloned: PlacementForm = {
@@ -580,6 +584,11 @@ export function AdminFormsPage() {
 
   async function handleSaveForm(event?: React.FormEvent) {
     if (event) event.preventDefault()
+    
+    if (!yearOptions || yearOptions.length === 0) {
+      showToast('You must create an Academic Year in settings before publishing forms.')
+      return
+    }
     
     if (!formName.trim()) {
       showToast('Form Name is required.')

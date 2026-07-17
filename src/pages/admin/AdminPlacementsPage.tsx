@@ -24,7 +24,7 @@ import {
 } from '../../lib/AcademicYearContext'
 
 export function AdminPlacementsPage() {
-  const { selectedYear } = useAcademicYear()
+  const { selectedYear, yearOptions } = useAcademicYear()
   const [searchParams] = useSearchParams()
   const tabParam = searchParams.get('tab')
   const formIdParam = searchParams.get('formId')
@@ -337,6 +337,10 @@ export function AdminPlacementsPage() {
   function handleManualSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!manualRoll || !manualName || !manualCompany || !manualPkg || !manualRole) return
+    if (!yearOptions || yearOptions.length === 0) {
+      showToast('You must create an Academic Year in settings before adding placements.')
+      return
+    }
 
     const normalizedRoll = manualRoll.trim().toUpperCase()
     const studentExists = masterRows.some(
