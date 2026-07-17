@@ -246,7 +246,9 @@ export async function setupDatabase() {
         );
       `);
       await client.query(`ALTER TABLE users ALTER COLUMN associated_id TYPE VARCHAR(255);`).catch(() => {});
-
+      await client.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS totp_secret VARCHAR(255);`).catch(() => {});
+      await client.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS security_question TEXT;`).catch(() => {});
+      await client.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS security_answer_hash VARCHAR(255);`).catch(() => {});
       // 8. Career Roadmaps table
       await client.query(`
         CREATE TABLE IF NOT EXISTS career_roadmaps (
