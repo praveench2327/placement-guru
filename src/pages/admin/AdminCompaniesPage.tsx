@@ -53,7 +53,7 @@ function generateNextCompanyId(existingCompanies: CompanyDrive[]): string {
 
 export function AdminCompaniesPage() {
   const navigate = useNavigate()
-  const { selectedYear, yearOptions } = useAcademicYear()
+  const { selectedYear, academicYears } = useAcademicYear()
 
   const companiesList = useStoreState(loadCompanies) ?? []
   const allForms = useStoreState(loadPlacementForms) ?? []
@@ -125,7 +125,7 @@ export function AdminCompaniesPage() {
   }
 
   function handleExcelUpload(e: React.ChangeEvent<HTMLInputElement>, companyId: string) {
-    if (!yearOptions || yearOptions.length === 0) {
+    if (!academicYears || academicYears.length === 0) {
       showToast('You must create an Academic Year in settings before uploading selections.')
       if (e.target) e.target.value = ''
       return
@@ -383,7 +383,7 @@ export function AdminCompaniesPage() {
   function handleCreateDrive(e: React.FormEvent) {
     e.preventDefault()
     if (!compName || !pkgMin || !pkgMax) return
-    if (!yearOptions || yearOptions.length === 0) {
+    if (!academicYears || academicYears.length === 0) {
       showToast('You must create an Academic Year in settings before creating a company drive.')
       return
     }
