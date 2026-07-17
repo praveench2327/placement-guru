@@ -609,7 +609,8 @@ export function AdminFormsPage() {
       }
     }
 
-    const nextForm: PlacementForm = {
+    try {
+      const nextForm: PlacementForm = {
       id: editingId ?? generateNextFormId(allForms),
       name: formName.trim(),
       type: formType,
@@ -760,8 +761,12 @@ export function AdminFormsPage() {
       await saveCompanies(companies)
     }
 
-    setIsOpen(false)
-    resetModal()
+      setIsOpen(false)
+      resetModal()
+    } catch (err: any) {
+      console.error('Error saving form:', err)
+      showToast('Error saving form: ' + (err.message || 'Unknown error'))
+    }
   }
 
   function handleDownloadFiltered(formId: string) {
@@ -1062,7 +1067,7 @@ export function AdminFormsPage() {
               Configure the form like a modern online form, publish it to the student dashboard, and include the closing date and time.
             </p>
 
-            <form onSubmit={handleSaveForm} className="mt-4 grid gap-6 lg:grid-cols-[1fr,360px]">
+            <form onSubmit={(e) => e.preventDefault()} className="mt-4 grid gap-6 lg:grid-cols-[1fr,360px]">
               <div className="space-y-4">
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
@@ -1555,7 +1560,8 @@ export function AdminFormsPage() {
                     Cancel
                   </button>
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={handleSaveForm}
                     className="h-10 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-pop hover:opacity-95"
                   >
                     {editingId ? 'Save Form' : 'Publish Form'}
