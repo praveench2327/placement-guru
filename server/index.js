@@ -917,7 +917,7 @@ app.post('/api/academic-years', authenticateToken, async (req, res) => {
 
 // PUT update an academic year
 app.put('/api/academic-years/:id', authenticateToken, async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // Note: 'id' maps to the academic_year string on the frontend
   const { academic_year, start_date, end_date, status, college_name, university, college_location, college_website } = req.body;
 
   try {
@@ -930,7 +930,7 @@ app.put('/api/academic-years/:id', authenticateToken, async (req, res) => {
       `UPDATE academic_years
        SET academic_year=$1, start_date=$2, end_date=$3, status=$4,
            college_name=$5, university=$6, college_location=$7, college_website=$8
-       WHERE id = $9`,
+       WHERE academic_year = $9`,
       [
         academic_year,
         start_date || '',
@@ -940,7 +940,7 @@ app.put('/api/academic-years/:id', authenticateToken, async (req, res) => {
         university || '',
         college_location || '',
         college_website || '',
-        parseInt(id)
+        id
       ]
     );
     await refreshActiveYear();
@@ -952,11 +952,11 @@ app.put('/api/academic-years/:id', authenticateToken, async (req, res) => {
 
 // DELETE an academic year and only that year's operational data
 app.delete('/api/academic-years/:id', authenticateToken, async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // Note: 'id' maps to the academic_year string on the frontend (e.g., '2026-2027')
 
   try {
     // Get the academic year string
-    const yearResult = await query('SELECT * FROM academic_years WHERE id = $1', [parseInt(id)]);
+    const yearResult = await query('SELECT * FROM academic_years WHERE academic_year = $1', [id]);
     if (yearResult.rows.length === 0) {
       return res.status(404).json({ error: 'Academic year not found' });
     }
@@ -985,7 +985,7 @@ app.delete('/api/academic-years/:id', authenticateToken, async (req, res) => {
       await query(`DELETE FROM ${table} WHERE academic_year = $1`, [yearStr]);
     }
 
-    await query('DELETE FROM academic_years WHERE id = $1', [parseInt(id)]);
+    await query('DELETE FROM academic_years WHERE academic_year = $1', [yearStr]);
     await query('COMMIT');
     await refreshActiveYear();
     res.json({ success: true, message: `Academic year ${yearStr} and its data deleted successfully` });
