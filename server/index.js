@@ -173,6 +173,9 @@ const mapCompanyToFrontend = (row) => ({
   jobType: row.job_type,
   academicYear: row.academic_year,
   remarks: row.remarks,
+  minCgpa: row.min_cgpa,
+  maxBacklogs: row.max_backlogs,
+  formId: row.form_id,
 });
 
 const mapPlacementToFrontend = (row) => ({
@@ -1336,7 +1339,6 @@ app.post('/api/master-rows', authenticateToken, async (req, res) => {
   const rows = req.body;
   try {
     await query('BEGIN');
-    await query('LOCK TABLE master_students IN ACCESS EXCLUSIVE MODE');
     // Get all EXISTING roll numbers for this academic year to track who gets removed
     const existingStudentsRes = await query('SELECT UPPER(roll_number) as roll FROM master_students WHERE academic_year = $1', [req.academicYear]);
     const oldRolls = existingStudentsRes.rows.map(r => r.roll);
@@ -1395,7 +1397,6 @@ app.post('/api/companies', authenticateToken, async (req, res) => {
   const list = req.body;
   try {
     await query('BEGIN');
-    await query('LOCK TABLE companies IN ACCESS EXCLUSIVE MODE');
     await query('DELETE FROM companies WHERE academic_year = $1', [req.academicYear]);
     
     // Deduplicate companies
@@ -1412,10 +1413,10 @@ app.post('/api/companies', authenticateToken, async (req, res) => {
 
     for (const c of uniqueList) {
       await query(`
-        INSERT INTO companies (id, name, sector, type, location, drives, hires, package, status, mode, job_type, academic_year, remarks)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+        INSERT INTO companies (id, name, sector, type, location, drives, hires, package, status, mode, job_type, academic_year, remarks, min_cgpa, max_backlogs, form_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
       `, [
-        c.id, c.name, c.sector, c.type, c.location, c.drives, c.hires, c.package, c.status, c.mode, c.jobType, req.academicYear, c.remarks
+        c.id, c.name, c.sector, c.type, c.location, c.drives, c.hires, c.package, c.status, c.mode, c.jobType, req.academicYear, c.remarks, c.minCgpa, c.maxBacklogs, c.formId
       ]);
     }
     await query('COMMIT');
@@ -1430,7 +1431,6 @@ app.post('/api/placements', authenticateToken, async (req, res) => {
   const list = req.body;
   try {
     await query('BEGIN');
-    await query('LOCK TABLE placements IN ACCESS EXCLUSIVE MODE');
     await query('DELETE FROM placements WHERE academic_year = $1', [req.academicYear]);
     
     // Deduplicate placements
@@ -1465,7 +1465,6 @@ app.post('/api/placement-forms', authenticateToken, async (req, res) => {
   const list = req.body;
   try {
     await query('BEGIN');
-    await query('LOCK TABLE placement_forms IN ACCESS EXCLUSIVE MODE');
 
     // 1. Fetch current form IDs and statuses before changes
     const currentFormsResult = await query(
@@ -1602,7 +1601,6 @@ app.post('/api/form-submissions', authenticateToken, async (req, res) => {
   const list = req.body;
   try {
     await query('BEGIN');
-    await query('LOCK TABLE form_submissions IN ACCESS EXCLUSIVE MODE');
     await query('DELETE FROM form_submissions WHERE academic_year = $1', [req.academicYear]);
     
     // Deduplicate submissions
