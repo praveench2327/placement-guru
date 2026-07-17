@@ -891,7 +891,7 @@ export function AdminFormsPage() {
   return (
     <>
       {toastMessage && (
-        <div className="fixed top-4 right-4 z-50 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-pop animate-in fade-in duration-300">
+        <div className="fixed top-4 right-4 z-[100] rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-pop animate-in fade-in duration-300">
           {toastMessage}
         </div>
       )}
