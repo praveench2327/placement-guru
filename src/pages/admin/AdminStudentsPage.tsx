@@ -26,7 +26,7 @@ import {
   useStoreState,
 } from '../../lib/placeproStore'
 import { getShortBranchName, getAllShortBranches } from '../../lib/branchUtils'
-import { getAcademicYearFromYop } from '../../lib/AcademicYearContext'
+import { getAcademicYearFromYop, useAcademicYear } from '../../lib/AcademicYearContext'
 
 interface StudentRecord {
   id: string
@@ -317,6 +317,7 @@ export const ELIGIBILITY_COLUMNS = [
 
 export function AdminStudentsPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const { yearOptions } = useAcademicYear()
 
   const allMasterRows = useStoreState(loadMasterRows) ?? []
   const allPlacements = useStoreState(loadPlacements) ?? []
@@ -487,6 +488,10 @@ export function AdminStudentsPage() {
 
   async function confirmUpload() {
     if (!selectedFile || previewRows.length === 0) return
+    if (!yearOptions || yearOptions.length === 0) {
+      showToast('You must create an Academic Year in settings before adding students.')
+      return
+    }
 
     // Merge strategy: Update existing or add new rows based on Roll Number
     const existingMap = new Map()
@@ -591,6 +596,11 @@ export function AdminStudentsPage() {
   function handleManualAdd(event: React.FormEvent) {
     event.preventDefault()
     if (!newRoll || !newName || !newCgpa) return
+    
+    if (!yearOptions || yearOptions.length === 0) {
+      showToast('You must create an Academic Year in settings before adding students.')
+      return
+    }
 
     const nameParts = newName.trim().split(/\s+/)
     const firstName = nameParts[0] ?? newName
