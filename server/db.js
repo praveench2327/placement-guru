@@ -607,6 +607,7 @@ async function runMockSetup() {
     ];
   }
 
+  const isMockDbInitialized = db.users.length > 0;
   if (isMockDbInitialized) {
     console.log('Mock DB already initialized (users exist). Skipping sample data seeding.');
   }
