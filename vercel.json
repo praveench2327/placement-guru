@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://placement-guru-backend.onrender.com/api/:path*"
+      "destination": "https://placement-guru-backend-connection.onrender.com/api/:path*"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://placement-guru-backend.onrender.com/uploads/:path*"
+      "destination": "https://placement-guru-backend-connection.onrender.com/uploads/:path*"
     }
   ]
 }
