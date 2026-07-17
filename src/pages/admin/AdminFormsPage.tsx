@@ -578,9 +578,36 @@ export function AdminFormsPage() {
     setIsOpen(true)
   }
 
-  async function handleSaveForm(event: React.FormEvent) {
-    event.preventDefault()
-    if (!formName || !endDate || builderFields.length === 0) return
+  async function handleSaveForm(event?: React.FormEvent) {
+    if (event) event.preventDefault()
+    
+    if (!formName.trim()) {
+      showToast('Form Name is required.')
+      return
+    }
+    if (!endDate) {
+      showToast('Close Date is required.')
+      return
+    }
+    if (builderFields.length === 0) {
+      showToast('At least one question is required.')
+      return
+    }
+    
+    if (hasCompanyDrive) {
+      if (!compName.trim()) {
+        showToast('Company Name is required for drive forms.')
+        return
+      }
+      if (!compLocation.trim()) {
+        showToast('Company Location is required.')
+        return
+      }
+      if (!compPkgMin) {
+        showToast('Min Package is required.')
+        return
+      }
+    }
 
     const nextForm: PlacementForm = {
       id: editingId ?? generateNextFormId(allForms),
@@ -1042,7 +1069,6 @@ export function AdminFormsPage() {
                     <label className="text-xs font-semibold uppercase text-muted-foreground">Form Name</label>
                     <input
                       type="text"
-                      required
                       value={formName}
                       onChange={(event) => setFormName(event.target.value)}
                       className="mt-1.5 h-10 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring"
@@ -1089,7 +1115,6 @@ export function AdminFormsPage() {
                     <label className="text-xs font-semibold uppercase text-muted-foreground">Close Date</label>
                     <input
                       type="date"
-                      required
                       value={endDate}
                       onChange={(event) => setEndDate(event.target.value)}
                       className="mt-1 h-10 w-full rounded-lg border border-input bg-background px-3 text-xs outline-none transition focus:border-ring focus:ring-2 focus:ring-ring"
@@ -1099,7 +1124,6 @@ export function AdminFormsPage() {
                     <label className="text-xs font-semibold uppercase text-muted-foreground">Close Time</label>
                     <input
                       type="time"
-                      required
                       value={endTime}
                       onChange={(event) => setEndTime(event.target.value)}
                       className="mt-1 h-10 w-full rounded-lg border border-input bg-background px-3 text-xs outline-none transition focus:border-ring focus:ring-2 focus:ring-ring"
@@ -1133,7 +1157,6 @@ export function AdminFormsPage() {
                           <label className="text-[11px] font-semibold text-muted-foreground uppercase">Company Name</label>
                           <input
                             type="text"
-                            required
                             placeholder="e.g. Amazon"
                             value={compName}
                             onChange={(e) => setCompName(e.target.value)}
@@ -1172,7 +1195,6 @@ export function AdminFormsPage() {
                           <label className="text-[11px] font-semibold text-muted-foreground uppercase">Location</label>
                           <input
                             type="text"
-                            required
                             placeholder="e.g. Hyderabad"
                             value={compLocation}
                             onChange={(e) => setCompLocation(e.target.value)}
@@ -1230,7 +1252,6 @@ export function AdminFormsPage() {
                             <label className="text-[10px] font-semibold text-muted-foreground uppercase">Min Pkg (LPA)</label>
                             <input
                               type="number"
-                              required
                               placeholder="Min"
                               value={compPkgMin}
                               onChange={(e) => setCompPkgMin(e.target.value)}
