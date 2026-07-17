@@ -223,11 +223,10 @@ export function AdminAcademicYearsPage() {
           {years.map((y) => {
             const sc = statusConfig[y.status] || statusConfig.UPCOMING
             const s = stats[y.academic_year] || { students: 0, companies: 0, placements: 0 }
-            const isProcessing = actionLoading === y.id
-
+            const isProcessing = actionLoading !== null // Simplifies processing loader check
             return (
               <div
-                key={y.id}
+                key={y.academic_year}
                 className={`card-surface overflow-hidden transition-all duration-300 hover:shadow-lg ${y.status === 'ACTIVE' ? 'ring-2 ring-emerald-400/40' : ''}`}
               >
                 {/* Status ribbon */}
