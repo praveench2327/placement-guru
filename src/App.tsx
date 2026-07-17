@@ -18,6 +18,7 @@ const AdminAuditPage = lazy(() => import('./pages/admin/AdminAuditPage').then((m
 const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage').then((m) => ({ default: m.AdminSettingsPage })))
 
 const AdminComparisonPage = lazy(() => import('./pages/admin/AdminComparisonPage').then((m) => ({ default: m.AdminComparisonPage })))
+const AdminAnalyticsPage = lazy(() => import('./pages/admin/AdminAnalyticsPage').then((m) => ({ default: m.AdminAnalyticsPage })))
 const AdminReportsPage = lazy(() => import('./pages/admin/AdminReportsPage').then((m) => ({ default: m.AdminReportsPage })))
 const StudentLayout = lazy(() => import('./pages/StudentDashboard').then((m) => ({ default: m.StudentLayout })))
 const StudentHomePage = lazy(() => import('./pages/student/StudentHomePage').then((m) => ({ default: m.StudentHomePage })))
@@ -73,6 +74,7 @@ function AppShell() {
         <Route path="academic-years" element={<Navigate to="/admin/settings" replace />} />
 
         <Route path="comparison" element={<AdminComparisonPage />} />
+        <Route path="analytics" element={<AdminAnalyticsPage />} />
         <Route path="reports" element={<AdminReportsPage />} />
         <Route path="notifications" element={<AdminNotificationsPage />} />
         <Route path="audit" element={<AdminAuditPage />} />

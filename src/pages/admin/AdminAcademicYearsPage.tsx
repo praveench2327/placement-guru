@@ -32,7 +32,7 @@ export function AdminAcademicYearsPage() {
   const [editingYear, setEditingYear] = useState<AcademicYear | null>(null)
   const [formData, setFormData] = useState({ academic_year: '', start_date: '', end_date: '', status: 'UPCOMING' as string })
   const [error, setError] = useState('')
-  const [actionLoading, setActionLoading] = useState<number | null>(null)
+  const [actionLoading, setActionLoading] = useState<string | null>(null)
 
   const token = getAuthToken()
 
@@ -109,7 +109,7 @@ export function AdminAcademicYearsPage() {
     }
 
     try {
-      setActionLoading(-1)
+      setActionLoading('__saving__')
       const url = editingYear ? `/api/academic-years/${editingYear.academic_year}` : '/api/academic-years'
       const method = editingYear ? 'PUT' : 'POST'
       const res = await fetch(url, {
@@ -136,7 +136,7 @@ export function AdminAcademicYearsPage() {
   const handleActivate = async (y: AcademicYear) => {
     if (!confirm(`Activate ${y.academic_year}? This will archive the current active year.`)) return
     try {
-      setActionLoading(-1)
+      setActionLoading(y.academic_year)
       await fetch(`/api/academic-years/${y.academic_year}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -154,7 +154,7 @@ export function AdminAcademicYearsPage() {
   const handleArchive = async (y: AcademicYear) => {
     if (!confirm(`Archive ${y.academic_year}?`)) return
     try {
-      setActionLoading(-1)
+      setActionLoading(y.academic_year)
       await fetch(`/api/academic-years/${y.academic_year}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -172,7 +172,7 @@ export function AdminAcademicYearsPage() {
   const handleDelete = async (y: AcademicYear) => {
     if (!confirm(`Delete ${y.academic_year}? This can only succeed if no data exists for this year.`)) return
     try {
-      setActionLoading(-1)
+      setActionLoading(y.academic_year)
       const res = await fetch(`/api/academic-years/${y.academic_year}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -223,7 +223,7 @@ export function AdminAcademicYearsPage() {
           {years.map((y) => {
             const sc = statusConfig[y.status] || statusConfig.UPCOMING
             const s = stats[y.academic_year] || { students: 0, companies: 0, placements: 0 }
-            const isProcessing = actionLoading !== null // Simplifies processing loader check
+            const isProcessing = actionLoading === y.academic_year || actionLoading === '__saving__'
             return (
               <div
                 key={y.academic_year}
@@ -387,10 +387,10 @@ export function AdminAcademicYearsPage() {
               </button>
               <button
                 onClick={handleSave}
-                disabled={actionLoading === -1}
+                disabled={actionLoading === '__saving__'}
                 className="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition disabled:opacity-50"
               >
-                {actionLoading === -1 ? 'Saving...' : editingYear ? 'Update' : 'Create'}
+                {actionLoading === '__saving__' ? 'Saving...' : editingYear ? 'Update' : 'Create'}
               </button>
             </div>
           </div>

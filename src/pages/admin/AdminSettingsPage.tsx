@@ -59,7 +59,7 @@ export function AdminSettingsPage() {
     setIsSavingCollege(true)
     try {
       const token = getAuthToken()
-      const res = await fetch(`/api/academic-years/${currentYearObj.id}`, {
+      const res = await fetch(`/api/academic-years/${currentYearObj.academic_year}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export function AdminSettingsPage() {
   const [showYearModal, setShowYearModal] = useState(false)
   const [editingYear, setEditingYear] = useState<AcademicYear | null>(null)
   const [yearError, setYearError] = useState('')
-  const [yearActionLoading, setYearActionLoading] = useState<number | null>(null)
+  const [yearActionLoading, setYearActionLoading] = useState<string | null>(null)
   const [yearForm, setYearForm] = useState({
     academic_year: '',
     start_date: '',
@@ -268,9 +268,9 @@ export function AdminSettingsPage() {
     }
 
     try {
-      setYearActionLoading(-1)
+      setYearActionLoading('__saving__')
       const token = getAuthToken()
-      const url = editingYear ? `/api/academic-years/${editingYear.id}` : '/api/academic-years'
+      const url = editingYear ? `/api/academic-years/${editingYear.academic_year}` : '/api/academic-years'
       const method = editingYear ? 'PUT' : 'POST'
       const res = await fetch(url, {
         method,
@@ -296,9 +296,9 @@ export function AdminSettingsPage() {
   async function updateAcademicYearStatus(year: AcademicYear, status: AcademicYear['status']) {
     if (status === 'ACTIVE' && !confirm(`Activate ${year.academic_year}? The current active year will be archived.`)) return
     try {
-      setYearActionLoading(year.id)
+      setYearActionLoading(year.academic_year)
       const token = getAuthToken()
-      await fetch(`/api/academic-years/${year.id}`, {
+      await fetch(`/api/academic-years/${year.academic_year}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...year, status }),
@@ -313,9 +313,9 @@ export function AdminSettingsPage() {
   async function handleDeleteAcademicYear(year: AcademicYear) {
     if (!confirm(`Delete ${year.academic_year} and only that year's students, placements, companies, forms, submissions, and notifications?`)) return
     try {
-      setYearActionLoading(year.id)
+      setYearActionLoading(year.academic_year)
       const token = getAuthToken()
-      const res = await fetch(`/api/academic-years/${year.id}`, {
+      const res = await fetch(`/api/academic-years/${year.academic_year}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -325,7 +325,7 @@ export function AdminSettingsPage() {
         return
       }
 
-      const remainingYears = years.filter((item) => item.id !== year.id)
+      const remainingYears = years.filter((item) => item.academic_year !== year.academic_year)
       if (activeSelectedYear === year.academic_year && remainingYears.length > 0) {
         const nextYear = remainingYears.find((item) => item.status === 'ACTIVE') ?? remainingYears[0]
         setSelectedYear(nextYear.academic_year)
@@ -673,7 +673,7 @@ export function AdminSettingsPage() {
               <div className="grid gap-3 xl:grid-cols-2">
                 {years.map((year) => {
                   const stats = yearStats[year.academic_year] || { students: 0, companies: 0, placements: 0 }
-                  const isProcessing = yearActionLoading === year.id
+                  const isProcessing = yearActionLoading === year.academic_year
                   const statusClass =
                     year.status === 'ACTIVE'
                       ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
@@ -683,7 +683,7 @@ export function AdminSettingsPage() {
                   const StatusIcon = year.status === 'ACTIVE' ? CheckCircle2 : year.status === 'ARCHIVED' ? Archive : Clock
 
                   return (
-                    <div key={year.id} className="rounded-xl border border-border bg-card p-4">
+                    <div key={year.academic_year} className="rounded-xl border border-border bg-card p-4">
                       <div className="mb-3 flex items-start justify-between gap-3">
                         <div>
                           <div className="flex items-center gap-2">
@@ -1271,10 +1271,10 @@ export function AdminSettingsPage() {
               <button
                 type="button"
                 onClick={handleSaveAcademicYear}
-                disabled={yearActionLoading === -1}
+                disabled={yearActionLoading === '__saving__'}
                 className="h-10 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-pop hover:opacity-95 disabled:opacity-50"
               >
-                {yearActionLoading === -1 ? 'Saving...' : editingYear ? 'Update Year' : 'Create Year'}
+                {yearActionLoading === '__saving__' ? 'Saving...' : editingYear ? 'Update Year' : 'Create Year'}
               </button>
             </div>
           </div>

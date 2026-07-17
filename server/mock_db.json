@@ -1,9 +1,318 @@
 {
-  "master_students": [],
-  "placement_forms": [],
+  "master_students": [
+    {
+      "roll_number": "21JR1A0501",
+      "first_name": "Aarav",
+      "last_name": "Sharma",
+      "full_name": "Aarav Sharma",
+      "mail_id": "aarav.sharma@college.edu",
+      "phone_number": "9876500001",
+      "gender": "Male",
+      "state": "Telangana",
+      "city": "Hyderabad",
+      "branch": "CSE",
+      "date_of_birth": "2004-02-11",
+      "tenth_percentage": "92.4",
+      "tenth_yop": "2020",
+      "tenth_board": "CBSE",
+      "twelfth_percentage": "89.6",
+      "twelfth_yop": "2022",
+      "twelfth_board": "State Board",
+      "college_name": "PlacePro College",
+      "btech_cgpa": "8.9",
+      "btech_yop": "2026",
+      "active_backlogs": "No",
+      "no_of_backlogs": "0",
+      "academic_year": "2025-2026"
+    },
+    {
+      "roll_number": "21JR1A0514",
+      "first_name": "Priya",
+      "last_name": "Patel",
+      "full_name": "Priya Patel",
+      "mail_id": "priya.patel@college.edu",
+      "phone_number": "9876500014",
+      "gender": "Female",
+      "state": "Karnataka",
+      "city": "Bengaluru",
+      "branch": "CSE",
+      "date_of_birth": "2004-05-19",
+      "tenth_percentage": "90.5",
+      "tenth_yop": "2020",
+      "tenth_board": "CBSE",
+      "twelfth_percentage": "92.0",
+      "twelfth_yop": "2022",
+      "twelfth_board": "PUC",
+      "college_name": "PlacePro College",
+      "btech_cgpa": "8.4",
+      "btech_yop": "2026",
+      "active_backlogs": "No",
+      "no_of_backlogs": "0",
+      "academic_year": "2025-2026"
+    },
+    {
+      "roll_number": "21JR1A0403",
+      "first_name": "Rahul",
+      "last_name": "Verma",
+      "full_name": "Rahul Verma",
+      "mail_id": "rahul.verma@college.edu",
+      "phone_number": "9876500003",
+      "gender": "Male",
+      "state": "Andhra Pradesh",
+      "city": "Vijayawada",
+      "branch": "ECE",
+      "date_of_birth": "2004-08-02",
+      "tenth_percentage": "82.0",
+      "tenth_yop": "2020",
+      "tenth_board": "State Board",
+      "twelfth_percentage": "78.4",
+      "twelfth_yop": "2022",
+      "twelfth_board": "State Board",
+      "college_name": "PlacePro College",
+      "btech_cgpa": "7.8",
+      "btech_yop": "2026",
+      "active_backlogs": "No",
+      "no_of_backlogs": "0",
+      "academic_year": "2025-2026"
+    },
+    {
+      "roll_number": "21JR1A0309",
+      "first_name": "Sneha",
+      "last_name": "Iyer",
+      "full_name": "Sneha Iyer",
+      "mail_id": "sneha.iyer@college.edu",
+      "phone_number": "9876500009",
+      "gender": "Female",
+      "state": "Tamil Nadu",
+      "city": "Chennai",
+      "branch": "ME",
+      "date_of_birth": "2004-11-30",
+      "tenth_percentage": "85.0",
+      "tenth_yop": "2020",
+      "tenth_board": "CBSE",
+      "twelfth_percentage": "88.0",
+      "twelfth_yop": "2022",
+      "twelfth_board": "State Board",
+      "college_name": "PlacePro College",
+      "btech_cgpa": "8.1",
+      "btech_yop": "2026",
+      "active_backlogs": "No",
+      "no_of_backlogs": "0",
+      "academic_year": "2025-2026"
+    }
+  ],
+  "placement_forms": [
+    {
+      "id": "FRM-001",
+      "name": "Placement Registration 2026",
+      "type": "Registration",
+      "status": "Active",
+      "created": "2025-12-01",
+      "start_date": "2025-12-01",
+      "start_time": "09:00",
+      "end_date": "2026-07-31",
+      "end_time": "23:59",
+      "total": 2000,
+      "fields": [
+        {
+          "id": "fld-roll",
+          "label": "Roll Number",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter roll number"
+        },
+        {
+          "id": "fld-name",
+          "label": "Full Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter full name"
+        },
+        {
+          "id": "fld-branch",
+          "label": "Branch",
+          "type": "select",
+          "required": true,
+          "options": [
+            "CSE",
+            "IT",
+            "ECE",
+            "ME",
+            "EE",
+            "CE"
+          ]
+        },
+        {
+          "id": "fld-cgpa",
+          "label": "CGPA",
+          "type": "number",
+          "required": true,
+          "placeholder": "Enter current CGPA"
+        },
+        {
+          "id": "fld-resume",
+          "label": "Resume Upload",
+          "type": "file",
+          "required": true
+        }
+      ],
+      "has_company_drive": false,
+      "company_name": "",
+      "company_sector": "",
+      "company_category": "",
+      "company_location": "",
+      "company_drive_mode": "",
+      "company_job_type": "",
+      "company_pkg_min": "",
+      "company_pkg_max": "",
+      "company_academic_year": "",
+      "company_remarks": "",
+      "academic_year": "2025-2026"
+    },
+    {
+      "id": "FRM-002",
+      "name": "Amazon Drive Application",
+      "type": "Drive Application",
+      "status": "Active",
+      "created": "2026-06-15",
+      "start_date": "2026-06-15",
+      "start_time": "08:00",
+      "end_date": "2026-07-25",
+      "end_time": "18:00",
+      "total": 950,
+      "fields": [
+        {
+          "id": "fld-roll-2",
+          "label": "Roll Number",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "fld-name-2",
+          "label": "Full Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "fld-email-2",
+          "label": "Alternate Email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "id": "fld-resume-2",
+          "label": "Resume Upload",
+          "type": "file",
+          "required": true
+        }
+      ],
+      "has_company_drive": true,
+      "company_name": "Amazon",
+      "company_sector": "Tech/E-commerce",
+      "company_category": "Product",
+      "company_location": "Bengaluru",
+      "company_drive_mode": "On-campus",
+      "company_job_type": "Full-time",
+      "company_pkg_min": "8.0",
+      "company_pkg_max": "45.0",
+      "company_academic_year": "2025-2026",
+      "company_remarks": "",
+      "academic_year": "2025-2026"
+    }
+  ],
   "form_submissions": [],
-  "companies": [],
-  "placements": [],
+  "companies": [
+    {
+      "id": "COMP-001",
+      "name": "Google",
+      "sector": "Tech/Internet",
+      "type": "Product",
+      "location": "Hyderabad",
+      "drives": 1,
+      "hires": 0,
+      "package": "₹ 32.5 LPA",
+      "status": "Active",
+      "mode": "On-campus",
+      "job_type": "Full-time",
+      "academic_year": "2025-2026",
+      "remarks": ""
+    },
+    {
+      "id": "COMP-002",
+      "name": "Amazon",
+      "sector": "Tech/E-commerce",
+      "type": "Product",
+      "location": "Bengaluru",
+      "drives": 1,
+      "hires": 1,
+      "package": "₹ 45.0 LPA",
+      "status": "Completed",
+      "mode": "On-campus",
+      "job_type": "Full-time",
+      "academic_year": "2025-2026",
+      "remarks": ""
+    },
+    {
+      "id": "COMP-003",
+      "name": "Microsoft",
+      "sector": "Tech/Software",
+      "type": "Product",
+      "location": "Hyderabad",
+      "drives": 1,
+      "hires": 0,
+      "package": "₹ 48.0 LPA",
+      "status": "Completed",
+      "mode": "On-campus",
+      "job_type": "Full-time",
+      "academic_year": "2025-2026",
+      "remarks": ""
+    },
+    {
+      "id": "COMP-004",
+      "name": "TCS",
+      "sector": "IT Services",
+      "type": "Service",
+      "location": "Chennai",
+      "drives": 1,
+      "hires": 1,
+      "package": "₹ 7.5 LPA",
+      "status": "Completed",
+      "mode": "On-campus",
+      "job_type": "Full-time",
+      "academic_year": "2025-2026",
+      "remarks": ""
+    }
+  ],
+  "placements": [
+    {
+      "pkey": 1,
+      "id": "21JR1A0501",
+      "student": "Aarav Sharma",
+      "branch": "CSE",
+      "company": "Amazon",
+      "role": "Software Development Engineer",
+      "package": "₹ 45.0 LPA",
+      "date": "2026-07-05",
+      "type": "On-campus",
+      "email": "aarav.sharma@college.edu",
+      "phone": "9876500001",
+      "academic_year": "2025-2026"
+    },
+    {
+      "pkey": 2,
+      "id": "21JR1A0403",
+      "student": "Rahul Verma",
+      "branch": "ECE",
+      "company": "TCS",
+      "role": "Assistant System Engineer",
+      "package": "₹ 7.5 LPA",
+      "date": "2026-06-20",
+      "type": "On-campus",
+      "email": "rahul.verma@college.edu",
+      "phone": "9876500003",
+      "academic_year": "2025-2026"
+    }
+  ],
   "placement_notifications": [],
   "users": [
     {
@@ -209,6 +518,24 @@
       "uploaded_by": "Test",
       "rows": [],
       "academic_year": "2025-2026"
+    }
+  ],
+  "academic_years": [
+    {
+      "academic_year": "2025-2026",
+      "start_date": "2025-06-01",
+      "end_date": "2026-05-31",
+      "status": "ACTIVE",
+      "is_default": true,
+      "created_at": "2026-07-17T07:24:41.172Z"
+    },
+    {
+      "academic_year": "2026-2027",
+      "start_date": "2026-06-01",
+      "end_date": "2027-05-31",
+      "status": "UPCOMING",
+      "is_default": false,
+      "created_at": "2026-07-17T07:24:41.172Z"
     }
   ]
 }

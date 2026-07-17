@@ -28,7 +28,8 @@ let db = {
   career_roadmaps: [],
   student_career_progress: [],
   learning_resources: [],
-  academic_years: []
+  academic_years: [],
+  master_history: []
 };
 
 // Load existing data if file exists
@@ -701,10 +702,11 @@ function runMockQuery(text, params) {
     return { rows };
   }
 
-  if (queryLower === "select username, name from users where role = 'coordinator'") {
+  if (queryLower === "select username, name from users where role = 'coordinator'" ||
+      queryLower === "select username, name, associated_id from users where role = 'coordinator'") {
     const rows = db.users
       .filter(u => u.role === 'coordinator')
-      .map(u => ({ username: u.username, name: u.name }));
+      .map(u => ({ username: u.username, name: u.name, associated_id: u.associated_id }));
     return { rows };
   }
 
@@ -819,12 +821,12 @@ function runMockQuery(text, params) {
     saveDb();
     return { rows: [] };
   }
-  if (queryLower.startsWith("update academic_years set academic_year=$1, start_date=$2, end_date=$3, status=$4, college_name=$5, university=$6, college_location=$7, college_website=$8 where id = $9") ||
+  if (queryLower.startsWith("update academic_years set academic_year=$1, start_date=$2, end_date=$3, status=$4, college_name=$5, university=$6, college_location=$7, college_website=$8 where academic_year = $9") ||
       queryLower.startsWith("update academic_years")) {
-    // Note: in mock, we index academic_years by their primary key 'academic_year' name
-    // If updating by string identifier, we match it.
-    const yearStr = params[0];
-    const match = (db.academic_years || []).find(ay => ay.academic_year === yearStr);
+    // Mock uses the academic_year string as primary key
+    // params[8] is the WHERE academic_year value, params[0..7] are the new values
+    const whereYear = params[8] || params[0];
+    const match = (db.academic_years || []).find(ay => ay.academic_year === whereYear);
     if (match) {
       match.start_date = params[1];
       match.end_date = params[2];
@@ -837,11 +839,10 @@ function runMockQuery(text, params) {
     }
     return { rows: match ? [match] : [] };
   }
-  if (queryLower.startsWith("delete from academic_years where id = $1") || queryLower.startsWith("delete from academic_years")) {
-    // In mock setup we may get integer ID or string year. Handle either by matching params
+  if (queryLower.startsWith("delete from academic_years where academic_year = $1") || queryLower.startsWith("delete from academic_years where id") || queryLower.startsWith("delete from academic_years")) {
     const idVal = params[0];
-    db.academic_years = (db.academic_years || []).filter((ay, idx) => {
-      return ay.academic_year !== idVal && (idx + 1) !== parseInt(idVal);
+    db.academic_years = (db.academic_years || []).filter((ay) => {
+      return ay.academic_year !== idVal;
     });
     saveDb();
     return { rows: [] };
@@ -971,7 +972,8 @@ function runMockQuery(text, params) {
       btech_cgpa: params[22],
       btech_yop: params[23],
       active_backlogs: params[24],
-      no_of_backlogs: params[25]
+      no_of_backlogs: params[25],
+      academic_year: params[26]
     };
     db.master_students.push(row);
     saveDb();
@@ -991,8 +993,8 @@ function runMockQuery(text, params) {
       status: params[8],
       mode: params[9],
       job_type: params[10],
-      remarks: params[11],
-      academic_year: params[12]
+      academic_year: params[11],
+      remarks: params[12]
     };
     db.companies.push(row);
     saveDb();
