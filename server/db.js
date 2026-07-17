@@ -341,10 +341,22 @@ export async function setupDatabase() {
       for (const t of tablesWithAcademicYear) {
         await client.query(`ALTER TABLE ${t} ADD COLUMN IF NOT EXISTS academic_year VARCHAR(50);`).catch(() => {});
       }
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS has_company_drive BOOLEAN;`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_name VARCHAR(200);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_sector VARCHAR(100);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_category VARCHAR(100);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_location VARCHAR(200);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_drive_mode VARCHAR(50);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_job_type VARCHAR(50);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_pkg_min VARCHAR(50);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_pkg_max VARCHAR(50);`).catch(() => {});
       await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_min_cgpa VARCHAR(50);`).catch(() => {});
       await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_max_backlogs VARCHAR(50);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_academic_year VARCHAR(50);`).catch(() => {});
+      await client.query(`ALTER TABLE placement_forms ADD COLUMN IF NOT EXISTS company_remarks TEXT;`).catch(() => {});
 
       // Seed default career roadmaps
+      await client.query(`ALTER TABLE companies ADD COLUMN IF NOT EXISTS remarks TEXT;`).catch(() => {});
       const roadmapsRes = await client.query('SELECT COUNT(*) FROM career_roadmaps');
       if (parseInt(roadmapsRes.rows[0].count) === 0) {
         console.log('Seeding initial career roadmaps...');
