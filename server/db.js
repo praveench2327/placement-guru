@@ -27,7 +27,8 @@ let db = {
   users: [],
   career_roadmaps: [],
   student_career_progress: [],
-  learning_resources: []
+  learning_resources: [],
+  academic_years: []
 };
 
 // Load existing data if file exists
@@ -549,19 +550,24 @@ async function runMockSetup() {
     saveDb();
   }
 
-  // Only seed sample data for a fresh database (no users exist yet)
-  // Once users have been created, never auto-seed sample records even if tables are empty
-  const isMockDbInitialized = db.users.length > 0;
+  // Seed default academic years
+  if (!db.academic_years || db.academic_years.length === 0) {
+    db.academic_years = [
+      { academic_year: '2025-2026', start_date: '2025-06-01', end_date: '2026-05-31', status: 'ACTIVE', is_default: true, created_at: new Date().toISOString() },
+      { academic_year: '2026-2027', start_date: '2026-06-01', end_date: '2027-05-31', status: 'UPCOMING', is_default: false, created_at: new Date().toISOString() }
+    ];
+    saveDb();
+  }
 
-  if (!isMockDbInitialized && db.master_students.length === 0) {
+  if (db.master_students.length === 0) {
     db.master_students = [
-      { roll_number: '21JR1A0501', first_name: 'Aarav', last_name: 'Sharma', full_name: 'Aarav Sharma', mail_id: 'aarav.sharma@college.edu', phone_number: '9876500001', gender: 'Male', state: 'Telangana', city: 'Hyderabad', branch: 'CSE', date_of_birth: '2004-02-11', tenth_percentage: '92.4', tenth_yop: '2020', tenth_board: 'CBSE', twelfth_percentage: '89.6', twelfth_yop: '2022', twelfth_board: 'State Board', college_name: 'PlacePro College', btech_cgpa: '8.9', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0' },
-      { roll_number: '21JR1A0514', first_name: 'Priya', last_name: 'Patel', full_name: 'Priya Patel', mail_id: 'priya.patel@college.edu', phone_number: '9876500014', gender: 'Female', state: 'Karnataka', city: 'Bengaluru', branch: 'CSE', date_of_birth: '2004-05-19', tenth_percentage: '90.5', tenth_yop: '2020', tenth_board: 'CBSE', twelfth_percentage: '92.0', twelfth_yop: '2022', twelfth_board: 'PUC', college_name: 'PlacePro College', btech_cgpa: '8.4', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0' },
-      { roll_number: '21JR1A0403', first_name: 'Rahul', last_name: 'Verma', full_name: 'Rahul Verma', mail_id: 'rahul.verma@college.edu', phone_number: '9876500003', gender: 'Male', state: 'Andhra Pradesh', city: 'Vijayawada', branch: 'ECE', date_of_birth: '2004-08-02', tenth_percentage: '82.0', tenth_yop: '2020', tenth_board: 'State Board', twelfth_percentage: '78.4', twelfth_yop: '2022', twelfth_board: 'State Board', college_name: 'PlacePro College', btech_cgpa: '7.8', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0' },
-      { roll_number: '21JR1A0309', first_name: 'Sneha', last_name: 'Iyer', full_name: 'Sneha Iyer', mail_id: 'sneha.iyer@college.edu', phone_number: '9876500009', gender: 'Female', state: 'Tamil Nadu', city: 'Chennai', branch: 'ME', date_of_birth: '2004-11-30', tenth_percentage: '85.0', tenth_yop: '2020', tenth_board: 'CBSE', twelfth_percentage: '88.0', twelfth_yop: '2022', twelfth_board: 'State Board', college_name: 'PlacePro College', btech_cgpa: '8.1', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0' }
+      { roll_number: '21JR1A0501', first_name: 'Aarav', last_name: 'Sharma', full_name: 'Aarav Sharma', mail_id: 'aarav.sharma@college.edu', phone_number: '9876500001', gender: 'Male', state: 'Telangana', city: 'Hyderabad', branch: 'CSE', date_of_birth: '2004-02-11', tenth_percentage: '92.4', tenth_yop: '2020', tenth_board: 'CBSE', twelfth_percentage: '89.6', twelfth_yop: '2022', twelfth_board: 'State Board', college_name: 'PlacePro College', btech_cgpa: '8.9', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0', academic_year: '2025-2026' },
+      { roll_number: '21JR1A0514', first_name: 'Priya', last_name: 'Patel', full_name: 'Priya Patel', mail_id: 'priya.patel@college.edu', phone_number: '9876500014', gender: 'Female', state: 'Karnataka', city: 'Bengaluru', branch: 'CSE', date_of_birth: '2004-05-19', tenth_percentage: '90.5', tenth_yop: '2020', tenth_board: 'CBSE', twelfth_percentage: '92.0', twelfth_yop: '2022', twelfth_board: 'PUC', college_name: 'PlacePro College', btech_cgpa: '8.4', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0', academic_year: '2025-2026' },
+      { roll_number: '21JR1A0403', first_name: 'Rahul', last_name: 'Verma', full_name: 'Rahul Verma', mail_id: 'rahul.verma@college.edu', phone_number: '9876500003', gender: 'Male', state: 'Andhra Pradesh', city: 'Vijayawada', branch: 'ECE', date_of_birth: '2004-08-02', tenth_percentage: '82.0', tenth_yop: '2020', tenth_board: 'State Board', twelfth_percentage: '78.4', twelfth_yop: '2022', twelfth_board: 'State Board', college_name: 'PlacePro College', btech_cgpa: '7.8', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0', academic_year: '2025-2026' },
+      { roll_number: '21JR1A0309', first_name: 'Sneha', last_name: 'Iyer', full_name: 'Sneha Iyer', mail_id: 'sneha.iyer@college.edu', phone_number: '9876500009', gender: 'Female', state: 'Tamil Nadu', city: 'Chennai', branch: 'ME', date_of_birth: '2004-11-30', tenth_percentage: '85.0', tenth_yop: '2020', tenth_board: 'CBSE', twelfth_percentage: '88.0', twelfth_yop: '2022', twelfth_board: 'State Board', college_name: 'PlacePro College', btech_cgpa: '8.1', btech_yop: '2026', active_backlogs: 'No', no_of_backlogs: '0', academic_year: '2025-2026' }
     ];
   }
-  if (!isMockDbInitialized && db.companies.length === 0) {
+  if (db.companies.length === 0) {
     db.companies = [
       { id: 'COMP-001', name: 'Google', sector: 'Tech/Internet', type: 'Product', location: 'Hyderabad', drives: 1, hires: 0, package: '₹ 32.5 LPA', status: 'Active', mode: 'On-campus', job_type: 'Full-time', academic_year: '2025-2026', remarks: '' },
       { id: 'COMP-002', name: 'Amazon', sector: 'Tech/E-commerce', type: 'Product', location: 'Bengaluru', drives: 1, hires: 1, package: '₹ 45.0 LPA', status: 'Completed', mode: 'On-campus', job_type: 'Full-time', academic_year: '2025-2026', remarks: '' },
@@ -569,13 +575,13 @@ async function runMockSetup() {
       { id: 'COMP-004', name: 'TCS', sector: 'IT Services', type: 'Service', location: 'Chennai', drives: 1, hires: 1, package: '₹ 7.5 LPA', status: 'Completed', mode: 'On-campus', job_type: 'Full-time', academic_year: '2025-2026', remarks: '' }
     ];
   }
-  if (!isMockDbInitialized && db.placements.length === 0) {
+  if (db.placements.length === 0) {
     db.placements = [
-      { pkey: 1, id: '21JR1A0501', student: 'Aarav Sharma', branch: 'CSE', company: 'Amazon', role: 'Software Development Engineer', package: '₹ 45.0 LPA', date: '2026-07-05', type: 'On-campus', email: 'aarav.sharma@college.edu', phone: '9876500001' },
-      { pkey: 2, id: '21JR1A0403', student: 'Rahul Verma', branch: 'ECE', company: 'TCS', role: 'Assistant System Engineer', package: '₹ 7.5 LPA', date: '2026-06-20', type: 'On-campus', email: 'rahul.verma@college.edu', phone: '9876500003' }
+      { pkey: 1, id: '21JR1A0501', student: 'Aarav Sharma', branch: 'CSE', company: 'Amazon', role: 'Software Development Engineer', package: '₹ 45.0 LPA', date: '2026-07-05', type: 'On-campus', email: 'aarav.sharma@college.edu', phone: '9876500001', academic_year: '2025-2026' },
+      { pkey: 2, id: '21JR1A0403', student: 'Rahul Verma', branch: 'ECE', company: 'TCS', role: 'Assistant System Engineer', package: '₹ 7.5 LPA', date: '2026-06-20', type: 'On-campus', email: 'rahul.verma@college.edu', phone: '9876500003', academic_year: '2025-2026' }
     ];
   }
-  if (!isMockDbInitialized && db.placement_forms.length === 0) {
+  if (db.placement_forms.length === 0) {
     db.placement_forms = [
       {
         id: 'FRM-001', name: 'Placement Registration 2026', type: 'Registration', status: 'Active', created: '2025-12-01', start_date: '2025-12-01', start_time: '09:00', end_date: '2026-07-31', end_time: '23:59', total: 2000,
@@ -586,7 +592,7 @@ async function runMockSetup() {
           { id: 'fld-cgpa', label: 'CGPA', type: 'number', required: true, placeholder: 'Enter current CGPA' },
           { id: 'fld-resume', label: 'Resume Upload', type: 'file', required: true }
         ],
-        has_company_drive: false, company_name: '', company_sector: '', company_category: '', company_location: '', company_drive_mode: '', company_job_type: '', company_pkg_min: '', company_pkg_max: '', company_academic_year: '', company_remarks: ''
+        has_company_drive: false, company_name: '', company_sector: '', company_category: '', company_location: '', company_drive_mode: '', company_job_type: '', company_pkg_min: '', company_pkg_max: '', company_academic_year: '', company_remarks: '', academic_year: '2025-2026'
       },
       {
         id: 'FRM-002', name: 'Amazon Drive Application', type: 'Drive Application', status: 'Active', created: '2026-06-15', start_date: '2026-06-15', start_time: '08:00', end_date: '2026-07-25', end_time: '18:00', total: 950,
@@ -596,7 +602,7 @@ async function runMockSetup() {
           { id: 'fld-email-2', label: 'Alternate Email', type: 'email', required: true },
           { id: 'fld-resume-2', label: 'Resume Upload', type: 'file', required: true }
         ],
-        has_company_drive: true, company_name: 'Amazon', company_sector: 'Tech/E-commerce', company_category: 'Product', company_location: 'Bengaluru', company_drive_mode: 'On-campus', company_job_type: 'Full-time', company_pkg_min: '8.0', company_pkg_max: '45.0', company_academic_year: '2025-2026', company_remarks: ''
+        has_company_drive: true, company_name: 'Amazon', company_sector: 'Tech/E-commerce', company_category: 'Product', company_location: 'Bengaluru', company_drive_mode: 'On-campus', company_job_type: 'Full-time', company_pkg_min: '8.0', company_pkg_max: '45.0', company_academic_year: '2025-2026', company_remarks: '', academic_year: '2025-2026'
       }
     ];
   }
@@ -768,6 +774,69 @@ function runMockQuery(text, params) {
   }
 
 
+  if (queryLower === 'select * from academic_years' || queryLower === 'select * from academic_years order by academic_year desc') {
+    return { rows: db.academic_years || [] };
+  }
+  if (queryLower === "select academic_year from academic_years where status = 'active' limit 1") {
+    const active = (db.academic_years || []).find(ay => ay.status === 'ACTIVE');
+    return { rows: active ? [active] : [] };
+  }
+  if (queryLower.startsWith('select * from academic_years where academic_year = $1')) {
+    const match = (db.academic_years || []).find(ay => ay.academic_year === params[0]);
+    return { rows: match ? [match] : [] };
+  }
+  if (queryLower.startsWith("insert into academic_years ( academic_year, start_date, end_date, status, college_name, university, college_location, college_website, created_at ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)") ||
+      queryLower.startsWith("insert into academic_years")) {
+    const row = {
+      academic_year: params[0],
+      start_date: params[1],
+      end_date: params[2],
+      status: params[3],
+      college_name: params[4],
+      university: params[5],
+      college_location: params[6],
+      college_website: params[7],
+      created_at: params[8] || new Date().toISOString()
+    };
+    if (!db.academic_years) db.academic_years = [];
+    db.academic_years.push(row);
+    saveDb();
+    return { rows: [row] };
+  }
+  if (queryLower.startsWith("update academic_years set status='archived' where status='active'")) {
+    (db.academic_years || []).forEach(ay => {
+      if (ay.status === 'ACTIVE') ay.status = 'ARCHIVED';
+    });
+    saveDb();
+    return { rows: [] };
+  }
+  if (queryLower.startsWith("update academic_years set academic_year=$1, start_date=$2, end_date=$3, status=$4, college_name=$5, university=$6, college_location=$7, college_website=$8 where id = $9") ||
+      queryLower.startsWith("update academic_years")) {
+    // Note: in mock, we index academic_years by their primary key 'academic_year' name
+    // If updating by string identifier, we match it.
+    const yearStr = params[0];
+    const match = (db.academic_years || []).find(ay => ay.academic_year === yearStr);
+    if (match) {
+      match.start_date = params[1];
+      match.end_date = params[2];
+      match.status = params[3];
+      match.college_name = params[4];
+      match.university = params[5];
+      match.college_location = params[6];
+      match.college_website = params[7];
+      saveDb();
+    }
+    return { rows: match ? [match] : [] };
+  }
+  if (queryLower.startsWith("delete from academic_years where id = $1") || queryLower.startsWith("delete from academic_years")) {
+    // In mock setup we may get integer ID or string year. Handle either by matching params
+    const idVal = params[0];
+    db.academic_years = (db.academic_years || []).filter((ay, idx) => {
+      return ay.academic_year !== idVal && (idx + 1) !== parseInt(idVal);
+    });
+    saveDb();
+    return { rows: [] };
+  }
   if (queryLower === 'delete from master_students') {
     db.master_students = [];
     saveDb();
